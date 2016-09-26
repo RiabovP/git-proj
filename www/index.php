@@ -7,7 +7,7 @@
 		</title>
 		<link rel="stylesheet" href="style1.css" type="text/css">
 	</head>
-<body bgcolor="gray">
+<body bgcolor="	#D3D3D3">
 	
 
 <?php
