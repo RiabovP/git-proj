@@ -1,11 +1,11 @@
 ﻿<!Doctype>
 <HTML>
 	<head>
-		<meta charset=UTF8 content="масло двигатель коробка mobil" name="">
+		<meta charset=UTF8>
 		<title>
 			"Коннект к базе данных MySQL"
 		</title>
-		<link rel="stylesheet" href="style1.css" type="text/css">
+		<link rel="stylesheet" type="text/css">
 	</head>
 <body bgcolor="	#D3D3D3">
 	
