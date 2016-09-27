@@ -38,11 +38,65 @@
 		echo "<tr>";
 		for($j=0; $j<$n; $j++)
 		{
-			$value=mysql_result($query, $i, mysql_field_name($list_f, $j));
+			$value=mysql_result($query, $i, mysql_field_name($list_f, $j)); //сохранение значения из поля таблицы в переменной
 			echo "<td align=center>$value</td>";
 		}
 		echo "</tr>";
 	}
 ?>
 
+<?php
+	echo "<form method=post action=insert.php>";
+	echo "&nbsp;<table border=0 cellspacing=0 width=20% ><tr><td bgcolor='#005533' align=center><font color='#FFFFFF'>
+    <b> Добавить новые заказы в таблицу - $table_name</b></font></td></tr><tr><td></td></tr></table>";
+    echo "<table border=0 CELLSPACING=1 cellpadding=0 width=20% >";
+
+for($i=0;$i<$n; $i++)
+{
+    $type = mysql_field_type($list_f, $i);
+    $name_f = mysql_field_name ($list_f,$i);
+    $len = mysql_field_len($list_f, $i);
+    $flags_str = mysql_field_flags ($list_f, $i);
+
+    $flags = explode(" ", $flags_str); 
+    foreach ($flags as $f)
+    {
+        if ($f == 'auto_increment') $key = $name_f;   // запоминаем имя автоинкремента
+    }
+/* для каждого поля, не являющегося автоинкрементом, в 
+зависимости от его типа выводим подходящий элемент формы */
+	if ($key <> $name_f)
+	{ 
+		echo "<tr><td align=right bgcolor='#C2E3B6'><font size=2><b>&nbsp;". $name_f ."</b></font></td>";
+		switch ($type)
+		{
+        	case "string":
+            	$w = $len/5;
+            	echo "<td><input type=text name=\"$name_f\"size = $w ></td>";
+        	break;
+        	case "int": 
+            	$w =  $len/5;
+            	echo "<td><input type=text name=\"$name_f\"size = $w ></td>";
+        	break;  
+        	case "blob":
+            	echo "<td><textarea rows=6 cols=60 name=\"$name_f\"></textarea></td>";
+        	break;   
+    	} 
+	}
+    echo "</tr>";
+}
+echo "</table>";
+echo "<input type=submit name='add' value='Add'>";
+echo "</form>";
+?>
+<?php
+	echo"<br><br>";
+	echo "<form method=post action=delete.php>";
+	echo "<table border=0 cellspacing=0 width=20%><tr><td bgcolor='ffff3f' align=center> Удалить строку из таблицы $table_name</td></tr>";
+	echo "<tr><td align=right bgcolor='#C2E3B6'>id строки</td>";
+	echo "<td><input type=text name=id size=$w></td>";
+	echo "</tr></table>";
+	echo "<input type=submit name='del' value='Delete'>";
+	echo "</form>";
+?>
 </body>
